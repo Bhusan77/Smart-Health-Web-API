@@ -49,7 +49,7 @@ export default function SignupForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-      {/* USERNAME */}
+      
       <div>
         <label className="text-xs uppercase tracking-wide text-blue-400">
           Username
@@ -68,7 +68,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      {/* EMAIL */}
+      
       <div>
         <label className="text-xs uppercase tracking-wide text-blue-400">
           E-mail
@@ -87,7 +87,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      {/* PASSWORD */}
+      
       <div className="relative">
         <label className="text-xs uppercase tracking-wide text-blue-400">
           Password
@@ -111,7 +111,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      {/* CONFIRM PASSWORD */}
+      
       <div className="relative">
         <label className="text-xs uppercase tracking-wide text-blue-400">
           Confirm Password
@@ -135,7 +135,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      {/* TERMS */}
+      
       <div className="flex items-start gap-2 text-xs text-gray-400">
         <input type="checkbox" className="mt-1" required />
         <p>
@@ -146,7 +146,7 @@ export default function SignupForm() {
         </p>
       </div>
 
-      {/* BUTTON */}
+    
       <div className="flex items-center gap-4">
         <button
           type="submit"
