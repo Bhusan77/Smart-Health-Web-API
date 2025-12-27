@@ -1,4 +1,4 @@
-/* Reset and Base Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@
   min-height: 100vh;
 }
 
-/* Header Styles */
+
 .header {
   background-color: #ffffff;
   padding: 20px 40px;
@@ -68,7 +68,7 @@
   gap: 12px;
 }
 
-/* Button Styles */
+
 .btn-primary {
   background: #a855f7;
   color: white;
@@ -102,7 +102,7 @@
   color: #a855f7;
 }
 
-/* Hero Section */
+
 .hero {
   background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
   padding: 60px 40px;
@@ -264,7 +264,7 @@
   background: #334155;
 }
 
-/* Responsive Design */
+
 @media (max-width: 968px) {
   .hero-content {
     flex-direction: column;
