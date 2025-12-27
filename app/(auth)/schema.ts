@@ -1,9 +1,7 @@
-// schema.ts
+
 import { z } from "zod";
 
-// ----------------------
-// LOGIN SCHEMA
-// ----------------------
+
 export const loginSchema = z.object({
   email: z
     .string()
@@ -17,9 +15,7 @@ export const loginSchema = z.object({
 
 export type LoginData = z.infer<typeof loginSchema>;
 
-// ----------------------
-// REGISTER SCHEMA
-// ----------------------
+
 export const registerSchema = z
   .object({
     name: z
