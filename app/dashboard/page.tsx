@@ -6,7 +6,6 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const handleLogout = () => {
-    // You can clear auth tokens here if using authentication
     router.push("/login");
   };
 
