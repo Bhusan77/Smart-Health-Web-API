@@ -74,7 +74,7 @@ export default function SignupForm() {
           E-mail
         </label>
         <input
-          {...register("email")}
+          {...register("mail")}
           type="email"
           placeholder="Your email here"
           className="text-pink-400 w-full border-b border-blue-300 py-2 text-sm
