@@ -21,9 +21,9 @@ export default function LoginForm() {
 
   const onSubmit = async (values: LoginData) => {
     startTransition(async () => {
-      // Simulate API call
+    
       await new Promise((r) => setTimeout(r, 1000));
-      // Navigate to dashboard after login
+      
       router.push("/dashboard");
     });
 
@@ -36,7 +36,7 @@ export default function LoginForm() {
       className="space-y-4"
       autoComplete="off"
     >
-      {/* EMAIL */}
+     
       <div>
         <input
           {...register("email")}
@@ -53,7 +53,7 @@ export default function LoginForm() {
         )}
       </div>
 
-      {/* PASSWORD */}
+      
       <div>
         <input
           {...register("password")}
@@ -70,7 +70,6 @@ export default function LoginForm() {
         )}
       </div>
 
-      {/* OPTIONS */}
       <div className="flex items-center justify-between text-xs text-gray-500">
         <label className="flex items-center gap-2">
           <input type="checkbox" className="rounded" />
@@ -81,7 +80,6 @@ export default function LoginForm() {
         </button>
       </div>
 
-      {/* BUTTONS */}
       <div className="flex gap-3">
         <button
           type="submit"
@@ -92,7 +90,7 @@ export default function LoginForm() {
           {isSubmitting || pending ? "Logging in..." : "Login"}
         </button>
 
-        {/* SIGN UP NAVIGATION */}
+      
         <button
           type="button"
           onClick={() => router.push("/signup")}
