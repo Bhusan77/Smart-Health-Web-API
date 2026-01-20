@@ -18,7 +18,7 @@ export type LoginData = z.infer<typeof loginSchema>;
 
 export const registerSchema = z
   .object({
-    name: z
+    username: z
       .string()
       .nonempty("Username is required")
       .min(3, "Username must be at least 3 characters"),

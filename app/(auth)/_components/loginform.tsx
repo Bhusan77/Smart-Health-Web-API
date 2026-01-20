@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { loginSchema, type LoginData } from "../schema";
+import { handleLogin } from "@/lib/actions/auth-action";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -22,12 +23,10 @@ export default function LoginForm() {
   const onSubmit = async (values: LoginData) => {
     startTransition(async () => {
     
-      await new Promise((r) => setTimeout(r, 1000));
-      
+      const res = await handleLogin(values as LoginData)   
+      console.log(res)   
       router.push("/dashboard");
     });
-
-    console.log("login", values);
   };
 
   return (
@@ -39,15 +38,15 @@ export default function LoginForm() {
      
       <div>
         <input
-          {...register("email")}
-          type="email"
-          name="email_no_autofill"
-          autoComplete="new-email"
-          placeholder="Email address here"
-          className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm
-          text-black placeholder:text-gray-400
-          focus:border-blue-500 focus:outline-none"
-        />
+  {...register("email")}
+  type="email"
+  autoComplete="new-email"
+  placeholder="Email address here"
+  className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm
+  text-black placeholder:text-gray-400
+  focus:border-blue-500 focus:outline-none"
+/>
+
         {errors.email && (
           <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
         )}
@@ -56,15 +55,15 @@ export default function LoginForm() {
       
       <div>
         <input
-          {...register("password")}
-          type="password"
-          name="password_no_autofill"
-          autoComplete="new-password"
-          placeholder="Password"
-          className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm
-          text-black placeholder:text-gray-400
-          focus:border-blue-500 focus:outline-none"
-        />
+  {...register("password")}
+  type="password"
+  autoComplete="new-password"
+  placeholder="Password"
+  className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm
+  text-black placeholder:text-gray-400
+  focus:border-blue-500 focus:outline-none"
+/>
+
         {errors.password && (
           <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>
         )}
