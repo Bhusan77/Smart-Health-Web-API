@@ -5,11 +5,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTransition, useState } from "react";
 import { registerSchema, type RegisterData } from "../schema";
+import { handleRegister } from "@/lib/actions/auth-action";
 
 export default function SignupForm() {
   const router = useRouter();
   const [success, setSuccess] = useState(false);
   const [pending, startTransition] = useTransition();
+
+
+
 
   const {
     register,
@@ -22,12 +26,11 @@ export default function SignupForm() {
 
   const onSubmit = async (values: RegisterData) => {
     startTransition(async () => {
-      await new Promise((r) => setTimeout(r, 1000));
+      const res = await handleRegister(values as RegisterData)
+      console.log(res)
       setSuccess(true);
-      setTimeout(() => router.push("/login"), 2000);
     });
 
-    console.log("signup", values);
   };
 
   if (success) {
@@ -55,15 +58,15 @@ export default function SignupForm() {
           Username
         </label>
         <input
-          {...register("name")}
+          {...register("username")}
           type="text"
           placeholder="Type your username"
           className="text-pink-400 w-full border-b border-blue-300 py-2 text-sm
           focus:border-blue-500 focus:outline-none"
         />
-        {errors.name && (
+        {errors.username && (
           <p className="mt-1 text-xs text-red-500">
-            {errors.name.message}
+            {errors.username.message}
           </p>
         )}
       </div>
