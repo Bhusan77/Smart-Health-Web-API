@@ -1,8 +1,9 @@
 "use server";
-import { login, register } from "@/lib/api/auth"
+import { login, register, updateUser } from "@/lib/api/auth"
 import { LoginData, RegisterData } from "@/app/(auth)/schema"
 import { setAuthToken, setUserData, clearAuthCookies } from "../cookie"
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 export const handleRegister = async (data: RegisterData) => {
     try {
         const response = await register(data)
@@ -47,3 +48,26 @@ export const handleLogout = async () => {
     await clearAuthCookies();
     return redirect('/login');
 }
+
+export const handleUpdateUser = async (data: FormData) => {
+  try {
+    const response = await updateUser(data);
+    if (response.success) {
+      revalidatePath("/user/profile");
+      return {
+        success: true,
+        message: "Update successful",
+        data: response.data,
+      };
+    }
+    return {
+      success: false,
+      message: response.message || "Update failed",
+    };
+  } catch (error: Error | any) {
+    return {
+      success: false,
+      message: error.message || "Update action failed",
+    };
+  }
+};
