@@ -1,4 +1,3 @@
-
 import { LoginData, RegisterData } from "@/app/(auth)/schema"
 import axios from "./axios"
 import { API } from "./endpoints"
@@ -21,3 +20,18 @@ export const login = async (loginData: LoginData) => {
         throw new Error(error.response?.data?.message || error.message || 'Login failed')
     }
 }
+
+export const updateUser = async (userData: any) => {
+  try {
+    const response = await axios.put(API.AUTH.UPDATEPROFILE, userData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // for file upload/multer
+      },
+    });
+    return response.data;
+  } catch (error: Error | any) {
+    throw new Error(
+      error.response?.data?.message || error.message || "Update user failed",
+    );
+  }
+};
