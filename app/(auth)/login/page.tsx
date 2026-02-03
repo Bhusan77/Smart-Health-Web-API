@@ -7,7 +7,7 @@ export default function Page() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-blue-400 p-4">
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 bg-white rounded-2xl shadow-2xl overflow-hidden">
         
-        {/* LEFT SIDE */}
+        
         <div className="hidden md:flex flex-col justify-center px-10 text-white bg-gradient-to-br from-blue-600 to-blue-500">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold leading-tight">
@@ -20,7 +20,7 @@ export default function Page() {
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
+        
         <div className="flex items-center justify-center p-8">
           <div className="w-full max-w-sm space-y-6">
             <div className="text-center">
@@ -34,9 +34,9 @@ export default function Page() {
 
             <LoginForm />
 
-            {/* SOCIAL */}
+            
             <div className="text-center text-xs text-gray-400">
-              {/* Optional social login */}
+              
             </div>
           </div>
         </div>
