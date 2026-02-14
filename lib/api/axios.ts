@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getAuthToken } from '../cookie';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
-
+console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     headers: {

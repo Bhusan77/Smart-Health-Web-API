@@ -1,8 +1,10 @@
 "use client"
 
 import "@/app/styles/landing.css"
+import { useRouter } from "next/navigation"
 
 export default function LandingPage() {
+  const router = useRouter();
   return (
     <div className="landing-container">
       {/* Header */}
@@ -29,8 +31,17 @@ export default function LandingPage() {
           </nav>
 
           <div className="header-actions">
-            <button className="btn-secondary">Login</button>
-            <button className="btn-primary">SignUp</button>
+            <button
+              className="btn-secondary"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </button>
+            <button 
+            className="btn-primary"
+            onClick={()=> router.push("/signup")}
+            >
+              SignUp</button>
           </div>
         </div>
       </header>
@@ -57,10 +68,6 @@ export default function LandingPage() {
             </p>
 
             <button className="btn-hero">Schedule An Appointment</button>
-          </div>
-
-          <div className="hero-image">
-            <img src="/smiling-doctor-stethoscope.png" alt="Professional Doctor" />
           </div>
         </div>
       </section>

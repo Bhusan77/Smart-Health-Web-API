@@ -1,9 +1,10 @@
 "use server";
-import { login, register, updateUser } from "@/lib/api/auth"
+import { login, register, requestPasswordReset, resetPassword,updateUser} from "@/lib/api/auth"
 import { LoginData, RegisterData } from "@/app/(auth)/schema"
 import { setAuthToken, setUserData, clearAuthCookies } from "../cookie"
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+
 export const handleRegister = async (data: RegisterData) => {
     try {
         const response = await register(data)
@@ -25,6 +26,7 @@ export const handleRegister = async (data: RegisterData) => {
 
 export const handleLogin = async (data: LoginData) => {
     try {
+        console.log("login thchyou")
         const response = await login(data)
         if (response.success) {
             await setAuthToken(response.token)
@@ -70,4 +72,34 @@ export const handleUpdateUser = async (data: FormData) => {
       message: error.message || "Update action failed",
     };
   }
+};
+
+export const handleRequestPasswordReset = async (email: string) => {
+    try {
+        const response = await requestPasswordReset(email);
+        if (response.success) {
+            return {
+                success: true,
+                message: "Password reset email sent successfully"
+            }
+        }
+        return { success: false, message: response.message || 'Request password reset failed' }
+    } catch (error: Error | any) {
+        return { success: false, message: error.message || 'Request password reset action failed' };
+    }
+}
+
+export const handleResetPassword = async (token: string, newPassword: string) => {
+    try {
+        const response = await resetPassword(token, newPassword);
+        if (response.success) {
+            return {
+                success: true,
+                message: 'Password has been reset successfully'
+            }
+        }
+        return { success: false, message: response.message || 'Reset password failed' }
+    } catch (error: Error | any) {
+        return { success: false, message: error.message || 'Reset password action failed' }
+    }
 };
