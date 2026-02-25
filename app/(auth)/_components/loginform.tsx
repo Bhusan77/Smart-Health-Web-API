@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { loginSchema, type LoginData } from "../schema";
 import { handleLogin } from "@/lib/actions/auth-action";
 
@@ -11,6 +11,7 @@ export default function LoginForm() {
 
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -24,10 +25,28 @@ export default function LoginForm() {
   const onSubmit = async (values: LoginData) => {
     startTransition(async () => {
     
-      const res = await handleLogin(values as LoginData)   
-      console.log(res)   
-      router.push("/dashboard");
-    });
+      try {
+                const response = await handleLogin(values);
+                if (!response.success) {
+                    throw new Error(response.message);
+                }
+                if (response.success) {
+                    if (response.data?.role == 'admin') {
+                        return router.replace("/admin");
+                    }
+                    if (response.data?.role === 'user') {
+                        return router.replace("/dashboard");
+                    }
+                    return router.replace("/");
+                } else {
+                    setError('Login failed');
+                }
+            } catch (err: Error | any) {
+                setError(err.message || 'Login failed');
+            }
+        })
+
+    console.log("login", values);
   };
 
   return (
