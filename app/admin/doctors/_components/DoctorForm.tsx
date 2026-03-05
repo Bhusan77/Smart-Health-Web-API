@@ -46,7 +46,7 @@ export default function DoctorForm({
       const res =
         mode === "create"
           ? await handleCreateDoctor(payload)
-          : await handleUpdateDoctor(doctorId as string, payload); // ✅ correct
+          : await handleUpdateDoctor(doctorId as string, payload);
 
       if (!res?.success) {
         alert(res?.message || "Save failed");
@@ -59,86 +59,112 @@ export default function DoctorForm({
   };
 
   return (
-    <form onSubmit={onSubmit} className="border rounded p-4 max-w-xl space-y-3">
-      <div>
-        <label className="block text-sm mb-1">Name</label>
-        <input
-          name="name"
-          value={form.name}
-          onChange={onChange}
-          className="border rounded w-full px-3 py-2"
-          required
-        />
-      </div>
+    <div className="mt-2 bg-blue-100 min-h-screen p-4">
+      <form
+        onSubmit={onSubmit}
+        className="border border-blue-200 rounded-xl p-4 bg-white shadow-md max-w-xl space-y-4"
+      >
+        <h2 className="text-lg font-semibold text-gray-900">
+          {mode === "create" ? "Add Doctor" : "Update Doctor"}
+        </h2>
 
-      <div>
-        <label className="block text-sm mb-1">Specialization</label>
-        <input
-          name="specialization"
-          value={form.specialization}
-          onChange={onChange}
-          className="border rounded w-full px-3 py-2"
-          required
-        />
-      </div>
+        <div>
+          <label className="block text-sm mb-1 text-gray-900 font-medium">
+            Name
+          </label>
+          <input
+            name="name"
+            value={form.name}
+            onChange={onChange}
+            className="border border-blue-300 bg-white text-gray-900 placeholder-gray-400 rounded px-3 py-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
+            required
+          />
+        </div>
 
-      <div>
-        <label className="block text-sm mb-1">Email</label>
-        <input
-          name="email"
-          value={form.email}
-          onChange={onChange}
-          className="border rounded w-full px-3 py-2"
-          type="email"
-        />
-      </div>
+        <div>
+          <label className="block text-sm mb-1 text-gray-900 font-medium">
+            Specialization
+          </label>
+          <input
+            name="specialization"
+            value={form.specialization}
+            onChange={onChange}
+            className="border border-blue-300 bg-white text-gray-900 placeholder-gray-400 rounded px-3 py-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
+            required
+          />
+        </div>
 
-      <div>
-        <label className="block text-sm mb-1">Phone</label>
-        <input
-          name="phone"
-          value={form.phone}
-          onChange={onChange}
-          className="border rounded w-full px-3 py-2"
-        />
-      </div>
+        <div>
+          <label className="block text-sm mb-1 text-gray-900 font-medium">
+            Email
+          </label>
+          <input
+            name="email"
+            value={form.email}
+            onChange={onChange}
+            className="border border-blue-300 bg-white text-gray-900 placeholder-gray-400 rounded px-3 py-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
+            type="email"
+          />
+        </div>
 
-      <div>
-        <label className="block text-sm mb-1">Fee</label>
-        <input
-          name="fee"
-          value={form.fee}
-          onChange={onChange}
-          className="border rounded w-full px-3 py-2"
-          type="number"
-          min={0}
-        />
-      </div>
+        <div>
+          <label className="block text-sm mb-1 text-gray-900 font-medium">
+            Phone
+          </label>
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={onChange}
+            className="border border-blue-300 bg-white text-gray-900 placeholder-gray-400 rounded px-3 py-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+        </div>
 
-      <label className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          name="isActive"
-          checked={form.isActive}
-          onChange={onChange}
-        />
-        Active
-      </label>
+        <div>
+          <label className="block text-sm mb-1 text-gray-900 font-medium">
+            Fee
+          </label>
+          <input
+            name="fee"
+            value={form.fee}
+            onChange={onChange}
+            className="border border-blue-300 bg-white text-gray-900 placeholder-gray-400 rounded px-3 py-2 w-full focus:ring-2 focus:ring-blue-500 outline-none"
+            type="number"
+            min={0}
+          />
+        </div>
 
-      <div className="flex gap-2">
-        <button className="border px-4 py-2 rounded" type="submit" disabled={isPending}>
-          {mode === "create" ? "Create" : "Update"}
-        </button>
+        {/* Checkbox */}
+        <label className="flex items-center gap-2 text-gray-900 font-medium">
+          <input
+            type="checkbox"
+            name="isActive"
+            checked={form.isActive}
+            onChange={onChange}
+            className="h-4 w-4 accent-blue-600"
+          />
+          Active
+        </label>
 
-        <button
-          className="border px-4 py-2 rounded"
-          type="button"
-          onClick={() => router.back()}
-          disabled={isPending}
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+        {/* Buttons */}
+        <div className="flex gap-2 pt-2">
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition disabled:opacity-60"
+            type="submit"
+            disabled={isPending}
+          >
+            {isPending ? "Saving..." : mode === "create" ? "Create" : "Update"}
+          </button>
+
+          <button
+            className="bg-white border border-blue-300 text-gray-900 px-4 py-2 rounded hover:bg-blue-50 transition disabled:opacity-50"
+            type="button"
+            onClick={() => router.back()}
+            disabled={isPending}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

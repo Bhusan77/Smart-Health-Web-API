@@ -94,9 +94,13 @@ export default function LoginForm() {
           <input type="checkbox" className="rounded" />
           Remember me
         </label>
-        <button type="button" className="text-blue-600 hover:underline">
-          Forgot password?
-        </button>
+        <button
+  type="button"
+  className="text-blue-600 hover:underline"
+  onClick={() => router.push("/request-password-reset")}
+>
+  Forgot password?
+</button>
       </div>
 
       <div className="flex gap-3">

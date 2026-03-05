@@ -153,7 +153,7 @@ const UserTable = (
                         <tr>
                             <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">ID</th>
                             <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Image</th>
-                            <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                            <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Username</th>
                             <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Email</th>
                             <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Role</th>
                             <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Actions</th>
@@ -178,7 +178,9 @@ const UserTable = (
                                         </div>
                                     )}
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 font-medium">{user.fullname || " "}</td>
+                               <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 font-medium">
+  {user.username || "-"}
+</td>
                                 <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{user.email}</td>
                                 <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
                                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 capitalize">
