@@ -19,8 +19,8 @@ export default function PaymentSuccessPage() {
   useEffect(() => {
     const run = async () => {
       try {
-        const base = process.env.NEXT_PUBLIC_BACKEND_URL;
-        if (!base) throw new Error("NEXT_PUBLIC_BACKEND_URL is missing");
+        const base = process.env.NEXT_PUBLIC_API_BASE_URL;
+        if (!base) throw new Error("NEXT_PUBLIC_API_BASE_URL is missing");
 
         if (!pid || !refId) {
           setState("fail");
