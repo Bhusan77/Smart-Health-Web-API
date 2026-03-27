@@ -6,6 +6,10 @@ import { usePathname } from "next/navigation";
 const ADMIN_LINKS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/users", label: "Users" },
+   { href: "/admin/doctors", label: "Doctors" },
+  { href: "/admin/appointments", label: "Appointments" },
+  { href: "/admin/pharmacy", label: "Pharmacy" },
+  { href: "/admin/orders", label: "Orders" },
 ];
 
 export default function AdminSidebar() {

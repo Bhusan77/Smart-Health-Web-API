@@ -14,6 +14,12 @@ export default function CreateUserForm() {
     formState: { errors, isSubmitting },
   } = useForm<UserData>({
     resolver: zodResolver(UserSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -35,9 +41,7 @@ export default function CreateUserForm() {
     onChange(file);
   };
 
-  const handleDismissImage = (
-    onChange?: (file: File | undefined) => void
-  ) => {
+  const handleDismissImage = (onChange?: (file: File | undefined) => void) => {
     setPreviewImage(null);
     onChange?.(undefined);
     if (fileInputRef.current) fileInputRef.current.value = "";
@@ -49,6 +53,10 @@ export default function CreateUserForm() {
 
     try {
       const formData = new FormData();
+
+      // ✅ IMPORTANT: send username to backend
+      formData.append("username", data.username);
+
       formData.append("email", data.email);
       formData.append("password", data.password);
       formData.append("confirmPassword", data.confirmPassword);
@@ -66,7 +74,6 @@ export default function CreateUserForm() {
       reset();
       handleDismissImage();
       alert("User created successfully");
-
     } catch (err: any) {
       setError(err.message || "Something went wrong");
     }
@@ -120,29 +127,39 @@ export default function CreateUserForm() {
               ref={fileInputRef}
               type="file"
               accept=".jpg,.jpeg,.png,.webp"
-              onChange={(e) =>
-                handleImageChange(e.target.files?.[0], onChange)
-              }
+              onChange={(e) => handleImageChange(e.target.files?.[0], onChange)}
               className="block w-full text-sm text-black
-              file:mr-4 file:rounded-md file:border-0
-              file:bg-emerald-100 file:px-4 file:py-2
-              file:text-sm file:font-medium
-              file:text-emerald-700 hover:file:bg-emerald-200"
+                file:mr-4 file:rounded-md file:border-0
+                file:bg-emerald-100 file:px-4 file:py-2
+                file:text-sm file:font-medium
+                file:text-emerald-700 hover:file:bg-emerald-200"
             />
           )}
         />
         {errors.profile && (
-          <p className="text-xs text-red-600">
-            {errors.profile.message}
-          </p>
+          <p className="text-xs text-red-600">{errors.profile.message as any}</p>
+        )}
+      </div>
+
+      {/* ✅ Username */}
+      <div>
+        <label className="text-sm font-medium text-emerald-700">
+          Username
+        </label>
+        <input
+          {...register("username")}
+          type="text"
+          placeholder="e.g. aayush_123"
+          className="h-10 w-full rounded-md border border-emerald-200 bg-emerald-50 px-3 text-sm text-black placeholder:text-gray-400 outline-none focus:border-emerald-400"
+        />
+        {errors.username && (
+          <p className="text-xs text-red-600">{errors.username.message}</p>
         )}
       </div>
 
       {/* Email */}
       <div>
-        <label className="text-sm font-medium text-emerald-700">
-          Email
-        </label>
+        <label className="text-sm font-medium text-emerald-700">Email</label>
         <input
           {...register("email")}
           type="email"
@@ -150,26 +167,20 @@ export default function CreateUserForm() {
           className="h-10 w-full rounded-md border border-emerald-200 bg-emerald-50 px-3 text-sm text-black placeholder:text-gray-400 outline-none focus:border-emerald-400"
         />
         {errors.email && (
-          <p className="text-xs text-red-600">
-            {errors.email.message}
-          </p>
+          <p className="text-xs text-red-600">{errors.email.message}</p>
         )}
       </div>
 
       {/* Password */}
       <div>
-        <label className="text-sm font-medium text-sky-700">
-          Password
-        </label>
+        <label className="text-sm font-medium text-sky-700">Password</label>
         <input
           {...register("password")}
           type="password"
           className="h-10 w-full rounded-md border border-sky-200 bg-sky-50 px-3 text-sm text-black outline-none focus:border-sky-400"
         />
         {errors.password && (
-          <p className="text-xs text-red-600">
-            {errors.password.message}
-          </p>
+          <p className="text-xs text-red-600">{errors.password.message}</p>
         )}
       </div>
 
@@ -184,18 +195,12 @@ export default function CreateUserForm() {
           className="h-10 w-full rounded-md border border-sky-200 bg-sky-50 px-3 text-sm text-black outline-none focus:border-sky-400"
         />
         {errors.confirmPassword && (
-          <p className="text-xs text-red-600">
-            {errors.confirmPassword.message}
-          </p>
+          <p className="text-xs text-red-600">{errors.confirmPassword.message}</p>
         )}
       </div>
 
       {/* Global Error */}
-      {error && (
-        <p className="text-sm text-center text-red-600">
-          {error}
-        </p>
-      )}
+      {error && <p className="text-sm text-center text-red-600">{error}</p>}
 
       {/* Submit Button */}
       <button

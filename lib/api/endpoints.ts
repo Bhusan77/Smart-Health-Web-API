@@ -16,4 +16,17 @@ export const API = {
     
     },
   },
+  DOCTORS: {
+  LIST: "/api/doctors",
+  DETAIL: (id: string) => `/api/doctors/${id}`,
+},
+APPOINTMENTS: {
+  CREATE: "/api/appointments",
+  ME: "/api/appointments/me",
+},
+PHARMACY: {
+    MEDICINES: "/api/pharmacy/medicines",
+    CREATE_ORDER: "/api/pharmacy/orders",
+    MY_ORDERS: "/api/pharmacy/orders/me",
+  },
 }

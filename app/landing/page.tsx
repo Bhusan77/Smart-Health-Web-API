@@ -2,6 +2,7 @@
 
 import "@/app/styles/landing.css"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export default function LandingPage() {
   const router = useRouter();
@@ -47,30 +48,34 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <div className="hero-text">
-            <h1 className="hero-title">Elite Health Services</h1>
+<section className="hero">
+  <div className="hero-content">
+    <div className="hero-text">
+      <h1 className="hero-title">Elite Health Services</h1>
 
-            <div className="hero-badges">
-              <div className="badge">
-                <span className="badge-icon">✓</span>
-                <span>Reduce HbA1c</span>
-              </div>
-              <div className="badge">
-                <span className="badge-icon">✓</span>
-                <span>No more medications</span>
-              </div>
-            </div>
-
-            <p className="hero-description">
-              Providing the highest level of medical expertise and care, tailored to support your wellness journey.
-            </p>
-
-            <button className="btn-hero">Schedule An Appointment</button>
-          </div>
+      <div className="hero-badges">
+        <div className="badge">
+          <span className="badge-icon">✓</span>
+          <span>Reduce HbA1c</span>
         </div>
-      </section>
+        <div className="badge">
+          <span className="badge-icon">✓</span>
+          <span>No more medications</span>
+        </div>
+      </div>
+
+      <p className="hero-description">
+        Providing the highest level of medical expertise and care, tailored to support your wellness journey.
+      </p>
+
+      <Link href="/login">
+  <button className="btn-hero">
+    Schedule An Appointment
+  </button>
+</Link>
+    </div>
+  </div>
+</section>
 
       {/* Features Section */}
       <section className="features">

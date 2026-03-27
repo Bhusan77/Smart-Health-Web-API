@@ -12,9 +12,6 @@ export default function SignupForm() {
   const [success, setSuccess] = useState(false);
   const [pending, startTransition] = useTransition();
 
-
-
-
   const {
     register,
     handleSubmit,
@@ -26,11 +23,17 @@ export default function SignupForm() {
 
   const onSubmit = async (values: RegisterData) => {
     startTransition(async () => {
-      const res = await handleRegister(values as RegisterData)
-      console.log(res)
-      setSuccess(true);
-    });
+      const res = await handleRegister(values);
 
+      if (res?.success) {
+        setSuccess(true);
+
+        // Redirect to login after 1.5 seconds
+        setTimeout(() => {
+          router.push("/login");
+        }, 1500);
+      }
+    });
   };
 
   if (success) {
@@ -52,7 +55,7 @@ export default function SignupForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-      
+      {/* Username */}
       <div>
         <label className="text-xs uppercase tracking-wide text-blue-400">
           Username
@@ -71,7 +74,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      
+      {/* Email */}
       <div>
         <label className="text-xs uppercase tracking-wide text-blue-400">
           E-mail
@@ -90,7 +93,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      
+      {/* Password */}
       <div className="relative">
         <label className="text-xs uppercase tracking-wide text-blue-400">
           Password
@@ -114,7 +117,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      
+      {/* Confirm Password */}
       <div className="relative">
         <label className="text-xs uppercase tracking-wide text-blue-400">
           Confirm Password
@@ -138,7 +141,7 @@ export default function SignupForm() {
         )}
       </div>
 
-      
+      {/* Terms */}
       <div className="flex items-start gap-2 text-xs text-gray-400">
         <input type="checkbox" className="mt-1" required />
         <p>
@@ -149,7 +152,7 @@ export default function SignupForm() {
         </p>
       </div>
 
-    
+      {/* Button */}
       <div className="flex items-center gap-4">
         <button
           type="submit"
@@ -170,7 +173,6 @@ export default function SignupForm() {
           </span>
         </span>
       </div>
-
     </form>
   );
 }
